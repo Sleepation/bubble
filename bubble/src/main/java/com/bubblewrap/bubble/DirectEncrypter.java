@@ -3,12 +3,13 @@
     import java.io.File;
     import java.io.FileWriter;
     import java.io.IOException;
+    import java.math.BigInteger;
     import java.util.Random;
 
     public class DirectEncrypter {
 //    private static final String SECRET_KEY = "1234567890123456";
 
-        public static void encryptAndStore(String text, String key, String websiteName, String password) {
+        public static void encryptAndStore(String text, String websiteName, String password) {
             try {
                 // Step 2: Uppercase password
                 String upperCasePassword = password.toUpperCase();
@@ -24,8 +25,32 @@
                     }
                 }
 
+                // Step 3: Convert letters to numbers starting from 10
+                StringBuilder values = new StringBuilder();
+                for (int i = 0; i < upperCasePassword.length(); i++) {
+                    char c = upperCasePassword.charAt(i);
+                    if (Character.isLetter(c)) {
+                        int val = c - 'A' + 10; // A=10, B=11, ..., Z=35
+                        values.append(val);
+                    }
+                }
+
+                // Convert to BigInteger
                 String values1 = values.toString();
-                long value = Long.parseLong(values1);
+                BigInteger value = new BigInteger(values1);
+
+                // Generate two primes
+                int[] primes = generateTwoPrimes();
+
+                BigInteger prime1 = BigInteger.valueOf(primes[0]);
+                BigInteger prime2 = BigInteger.valueOf(primes[1]);
+                BigInteger key = prime1.multiply(prime2);
+
+                // Step 5: Multiply encryption key with password number
+
+                BigInteger encryptedData = value.multiply(prime1).multiply(prime2);
+
+                String output = ": " + encryptedData.toString();
 
 
 
@@ -64,7 +89,11 @@
             file.setReadOnly();
         }
 
+        public BigInteger getKey(BigInteger key){
+            return key;
+        }
+
         public static void main(String[] args) {
-            encryptAndStore("Hello from server", "myKey", "example.com", "MyPassword123");
+            encryptAndStore("Hello from server", "myKey", "MyPassword123");
         }
     }
