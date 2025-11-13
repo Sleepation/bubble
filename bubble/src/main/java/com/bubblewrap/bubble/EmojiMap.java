@@ -25,21 +25,12 @@ public class EmojiMap {
     // Converts a numeric password to emoji string
     public static String numberToEmoji(String numericPassword, HashMap<Character, String> emojiMap) {
         StringBuilder emojiPassword = new StringBuilder();
+        System.out.println("Num pwd " + numericPassword);
         for (char c : numericPassword.toCharArray()) {
             emojiPassword.append(emojiMap.getOrDefault(c, String.valueOf(c)));
+            System.out.println(emojiPassword);
         }
         return emojiPassword.toString();
     }
 
-    public static void main(String[] args) {
-        HashMap<Character, String> emojiMap = getEmoticonMap();
-
-        BigInteger decryptedPassword = new BigInteger("80000451040");
-
-        String numericPassword = decryptedPassword.toString(); // "80000451040"
-        String emojiPassword = numberToEmoji(numericPassword, emojiMap);
-
-        System.out.println("Numeric password: " + numericPassword);
-        System.out.println("Emoji password: " + emojiPassword);
-    }
 }

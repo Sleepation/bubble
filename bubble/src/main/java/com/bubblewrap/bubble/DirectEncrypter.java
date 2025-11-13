@@ -8,7 +8,6 @@
 
     public class DirectEncrypter {
 //    private static final String SECRET_KEY = "1234567890123456";
-        private BigInteger key;
         private DirectDecrypter decrypter;
         private String fileName;
 
@@ -32,33 +31,29 @@
                     if (Character.isLetter(c)) {
                         int val = c - 'A' + 10; // A=10, B=11
                         values.append(val);
+                        System.out.println("Encrypting "  +c);
                     }
                 }
 
 
                 // Convert to BigInteger
                 String values1 = values.toString();
-                BigInteger value = new BigInteger(values1);
+                BigInteger encryptedData = new BigInteger(values1);
+
 
                 // Generate two primes
-                int[] primes = generateTwoPrimes();
 
-                BigInteger prime1 = BigInteger.valueOf(primes[0]);
-                BigInteger prime2 = BigInteger.valueOf(primes[1]);
-                this.key = prime1.multiply(prime2);
 
                 // Step 5: Multiply encryption key with password number
 
-                BigInteger encryptedData = value.multiply(prime1).multiply(prime2);
+
                 HashMap<Character, String> emojiMap = EmojiMap.getEmoticonMap();
 
-                BigInteger decryptedPassword = new BigInteger("80000451040");
-
-                String numericPassword = decryptedPassword.toString(); // "80000451040"
+                String numericPassword = encryptedData.toString(); // "80000451040"
                 String emojiPassword = EmojiMap.numberToEmoji(numericPassword, emojiMap);
 
                 String output = websiteName + ": " + (emojiPassword);
-
+                System.out.println(output);
                 writeToFile(fileName, output);
 
                 System.out.println("✅ Encrypted data saved successfully to datafile.txt");
@@ -84,11 +79,11 @@
         }
 
         public void decrypt(){
-            decrypter.decrypt(key, fileName);
+            decrypter.decrypt(fileName);
         }
 
         public static void main(String[] args) {
-            DirectEncrypter encrypter = new DirectEncrypter("test", "instagram.txt", "Instagram", "password123", new DirectDecrypter());
+            DirectEncrypter encrypter = new DirectEncrypter("test", "instagram.txt", "Instagram", "abc", new DirectDecrypter());
             encrypter.decrypt();
         }
     }
