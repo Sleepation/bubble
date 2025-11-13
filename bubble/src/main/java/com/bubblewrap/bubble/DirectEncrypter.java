@@ -10,10 +10,13 @@
 //    private static final String SECRET_KEY = "1234567890123456";
         private DirectDecrypter decrypter;
         private String fileName;
+        private String encryptedValue;
+
+
 
         DirectEncrypter(String password, DirectDecrypter decrypter){
             this.fileName = "data";
-            encryptAndStore("hi", "ho", password);
+            this.encryptedValue = encryptAndStore("hi", "ho", password);
             this.decrypter = decrypter;
         }
 
@@ -76,6 +79,9 @@
             try (FileWriter writer = new FileWriter(filename, true)) { //Append and add it to next line
                 writer.write(content + "\n");
             }
+        }
+        public String getEncryptedValue() {
+            return encryptedValue;
         }
 
         public String decrypt(){

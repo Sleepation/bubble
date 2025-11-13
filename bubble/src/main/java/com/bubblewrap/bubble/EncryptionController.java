@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
         @PostMapping("/encrypt")
         public String encrypt(@RequestBody String text) {
-            de = new DirectEncrypter(text, de);
-            return new de.
+            de = new DirectEncrypter(text, new DirectDecrypter());
+            return de.getEncryptedValue();
         }
 
         @PostMapping("/decrypt")
         public String decrypt(@RequestBody String text) {
 
-            return new DirectEncrypter.decrypt(); // fake decryption (reverse again)
+            return de.decrypt();
         }
 
 
