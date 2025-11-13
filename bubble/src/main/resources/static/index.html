@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Encryption Project 🔐</title>
+    <title>Bubble</title>
     <style>
         body {
-            font-family: "Inter", sans-serif;
-            background: #f0f4f8;
+            font-family: "Trebuchet MS", serif;
+            background-image: url('Images/background.png');
+            background-size: cover;       /* fills screen, may crop edges */
+            background-position: center;  /* keeps it centered */
+            background-repeat: no-repeat; /* prevents tiling */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -22,7 +25,7 @@
             background-color: #4a90e2;
             color: white;
             border-radius: 8px;
-            transition: background 0.3s;
+            transition: background 3s;
         }
         a:hover {
             background-color: #357ABD;
@@ -30,10 +33,14 @@
     </style>
 </head>
 <body>
-<h1>Welcome to the Encryption App 💫</h1>
-<p>Select what you want to do:</p>
+<h1>Welcome to Bubble</h1>
+<p>What do you want to do today?</p>
 
-<a href="/encryption.html">Encrypt Text</a>
-<a href="/decrypt.html">Decrypt Text</a>
+<div class = "button-container">
+<a href="/encryption.html">Encrypt a plain text password</a>
+<a href="/decrypt.html">Decrypt an encrypted password</a>
+</div>
+
+<p></p>
 </body>
 </html>
