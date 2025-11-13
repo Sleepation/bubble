@@ -80,7 +80,7 @@
         }
 
         public static void main(String[] args) {
-            DirectEncrypter encrypter = new DirectEncrypter("test", "datafile.txt", "Instagram", "password123", new DirectDecrypter());
+            DirectEncrypter encrypter = new DirectEncrypter("test", "instagram.txt", "Instagram", "password123", new DirectDecrypter());
             encrypter.decrypt();
         }
     }
