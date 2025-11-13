@@ -3,6 +3,7 @@
     import java.io.FileWriter;
     import java.io.IOException;
     import java.math.BigInteger;
+    import java.util.HashMap;
     import java.util.Random;
 
     public class DirectEncrypter {
@@ -12,9 +13,10 @@
         private String fileName;
 
         DirectEncrypter(String text, String fileName, String websiteName, String password, DirectDecrypter decrypter){
+            this.fileName = fileName;
             encryptAndStore(text, websiteName, password);
             this.decrypter = decrypter;
-            this.fileName = fileName;
+
         }
 
         public void encryptAndStore(String text, String websiteName, String password) {
@@ -48,10 +50,16 @@
                 // Step 5: Multiply encryption key with password number
 
                 BigInteger encryptedData = value.multiply(prime1).multiply(prime2);
+                HashMap<Character, String> emojiMap = EmojiMap.getEmoticonMap();
 
-                String output = websiteName + ": " + encryptedData.toString();
+                BigInteger decryptedPassword = new BigInteger("80000451040");
 
-                writeToFile("datafile.txt", output);
+                String numericPassword = decryptedPassword.toString(); // "80000451040"
+                String emojiPassword = EmojiMap.numberToEmoji(numericPassword, emojiMap);
+
+                String output = websiteName + ": " + (emojiPassword);
+
+                writeToFile(fileName, output);
 
                 System.out.println("✅ Encrypted data saved successfully to datafile.txt");
             } catch (Exception e) {
