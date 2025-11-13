@@ -1,6 +1,5 @@
     package com.bubblewrap.bubble;
 
-    import java.io.File;
     import java.io.FileWriter;
     import java.io.IOException;
     import java.math.BigInteger;
@@ -9,6 +8,14 @@
     public class DirectEncrypter {
 //    private static final String SECRET_KEY = "1234567890123456";
         private BigInteger key;
+        private DirectDecrypter decrypter;
+        private String fileName;
+
+        DirectEncrypter(String text, String fileName, String websiteName, String password, DirectDecrypter decrypter){
+            encryptAndStore(text, websiteName, password);
+            this.decrypter = decrypter;
+            this.fileName = fileName;
+        }
 
         public void encryptAndStore(String text, String websiteName, String password) {
             try {
@@ -63,17 +70,17 @@
 
         // Write the encrypted text to file (read-only suggestion)
         private static void writeToFile(String filename, String content) throws IOException {
-            try (FileWriter writer = new FileWriter(filename, false)) { //Append and add it to next line
-                writer.write(content);
+            try (FileWriter writer = new FileWriter(filename, true)) { //Append and add it to next line
+                writer.write(content + "\n");
             }
-            // Mark file as read-only (system-level)
-            java.io.File file = new java.io.File(filename);
-            file.setReadOnly();
+        }
+
+        public void decrypt(){
+            decrypter.decrypt(key, fileName);
         }
 
         public static void main(String[] args) {
-            DirectEncrypter encrypter = new DirectEncrypter();
-            encrypter.encryptAndStore("Hello from server", "myKey", "MyPassword123");
-
+            DirectEncrypter encrypter = new DirectEncrypter("test", "datafile.txt", "Instagram", "password123", new DirectDecrypter());
+            encrypter.decrypt();
         }
     }
