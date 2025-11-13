@@ -2,9 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>HTTP Test Page 💫</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+            background-color: #f5f6fa;
+        }
+        textarea {
+            width: 300px;
+            height: 100px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            resize: none;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #output {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
+<h1>Spring Boot HTTP Test 🌸</h1>
 
+<button onclick="pingServer()">Ping Server</button>
+
+<br><br>
+<textarea id="input" placeholder="Type something..."></textarea><br>
+<button onclick="sendEcho()">Send to /api/echo</button>
+
+<div id="output"></div>
+
+<script>
+    async function pingServer() {
+        const res = await fetch("/api/ping");
+        const text = await res.text();
+        document.getElementById("output").innerText = text;
+    }
+
+    async function sendEcho() {
+        const text = document.getElementById("input").value;
+        const res = await fetch("/api/echo", {
+            method: "POST",
+            headers: { "Content-Type": "text/plain" },
+            body: text
+        });
+        const result = await res.text();
+        document.getElementById("output").innerText = result;
+    }
+</script>
 </body>
 </html>
