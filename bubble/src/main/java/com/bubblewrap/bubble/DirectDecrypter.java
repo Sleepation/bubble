@@ -13,25 +13,29 @@ public class DirectDecrypter {
     HashMap<Character, String> emojiMap = EmojiMap.getEmoticonMap();
     HashMap<String, Character> reverseMap = new HashMap<>();
 
-    for(Character c : emojiMap.keySet()) {
-        String emoji = emojiMap.get(c);
-        if (reverseMap.containsKey(emoji)) {
-            System.out.println("Warning: duplicate emoji for characters " + reverseMap.get(emoji) + " and " + c);
-        } else {
-            reverseMap.put(emoji, c);
+    public void newMap(){
+        for(Character c : emojiMap.keySet()) {
+            String emoji = emojiMap.get(c);
+            if (reverseMap.containsKey(emoji)) {
+                System.out.println("Warning: duplicate emoji for characters " + reverseMap.get(emoji) + " and " + c);
+            } else {
+                reverseMap.put(emoji, c);
+            }
         }
     }
 
-    public String emojiToNumber(String emojiPassword, HashMap<String, Character> reverseMap) {
-        StringBuilder number = new StringBuilder();
+    // Convert emoji string to number/letter string using reverseMap
+    private String emojiToNumber(String emojiPassword) {
+        StringBuilder numeric = new StringBuilder();
         int i = 0;
+
         while (i < emojiPassword.length()) {
             boolean matched = false;
 
-            // Try to match each emoji in reverseMap
+            // Try each emoji in reverseMap
             for (String emoji : reverseMap.keySet()) {
                 if (emojiPassword.startsWith(emoji, i)) {
-                    number.append(reverseMap.get(emoji));
+                    numeric.append(reverseMap.get(emoji));
                     i += emoji.length();
                     matched = true;
                     break;
@@ -39,12 +43,41 @@ public class DirectDecrypter {
             }
 
             if (!matched) {
-                // if no emoji matches, skip one char (or handle error)
+                // skip unknown chars
                 i++;
             }
         }
 
-        return number.toString();
+        return numeric.toString();
+    }
+
+    // Decrypt file
+    public void decrypt(BigInteger key, String fileName) {
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(fileName));
+
+            for (String line : lines) {
+                if (!line.contains(":")) continue;
+
+                String[] parts = line.split(":", 2);
+                String name = parts[0].trim();
+                String emojiPassword = parts[1].trim();
+
+                // Convert emoji to numeric string
+                String numericPassword = emojiToNumber(emojiPassword);
+
+                // Convert numeric string to BigInteger and decrypt
+                BigInteger encryptedValue = new BigInteger(numericPassword);
+                BigInteger originalValue = encryptedValue.divide(key);
+
+                System.out.println(name + ": " + originalValue);
+            }
+
+        } catch (IOException e) {
+            System.out.println("Error reading file: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid number format in file.");
+        }
     }
 
 }
