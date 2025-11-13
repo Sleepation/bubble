@@ -1,5 +1,6 @@
 package com.bubblewrap.bubble;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 
 public class EmojiMap {
@@ -77,16 +78,24 @@ public class EmojiMap {
         return map;
     }
 
-    public static void main(String[] args) {
-        HashMap<Character, String> emoticonMap = getEmoticonMap();
-
-        String text = "Hello123";
-        StringBuilder encrypted = new StringBuilder();
-
-        for (char c : text.toCharArray()) {
-            encrypted.append(emoticonMap.getOrDefault(c, String.valueOf(c))).append(" ");
+    // Converts a numeric password to emoji string
+    public static String numberToEmoji(String numericPassword, HashMap<Character, String> emojiMap) {
+        StringBuilder emojiPassword = new StringBuilder();
+        for (char c : numericPassword.toCharArray()) {
+            emojiPassword.append(emojiMap.getOrDefault(c, String.valueOf(c)));
         }
+        return emojiPassword.toString();
+    }
 
-        System.out.println(encrypted.toString());
+    public static void main(String[] args) {
+        HashMap<Character, String> emojiMap = getEmoticonMap();
+
+        BigInteger decryptedPassword = new BigInteger("80000451040");
+
+        String numericPassword = decryptedPassword.toString(); // "80000451040"
+        String emojiPassword = numberToEmoji(numericPassword, emojiMap);
+
+        System.out.println("Numeric password: " + numericPassword);
+        System.out.println("Emoji password: " + emojiPassword);
     }
 }
