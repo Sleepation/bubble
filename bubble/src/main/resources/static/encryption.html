@@ -31,7 +31,7 @@
         button, a {
             margin: 5px;
             padding: 10px 20px;
-            background-color: #48cae4;
+            background-color: #0096c7;
             color: white;
             border: none;
             border-radius: 8px;
@@ -40,7 +40,7 @@
         }
 
         button:hover, a:hover {
-            background-color: #357ABD;
+            background-color: #48cae4;
         }
         #output {
             margin-top: 15px;
@@ -49,14 +49,17 @@
     </style>
 </head>
 <body>
-<h2>Name of service</h2>
+<h2 style="color: #1f407c;">Name of service</h2>
 
-<textarea id="service" placeholder="Enter name of service for this password"></textarea>
-<h2>Password</h2>
+<textarea id="service" placeholder="Enter name of the service for this password"></textarea>
+<h2 style="color: #1f407c;">Password</h2>
 
 <textarea id="password" placeholder="Enter password to encrypt"></textarea><br>
-<button onclick="encrypt()">Encrypt</button>
-<a href="index.html">Back</a>
+<div>
+    <button onclick="encrypt()">Encrypt</button>
+    <a href="index.html">Back</a>
+</div>
+
 
 <div id="output"></div>
 
