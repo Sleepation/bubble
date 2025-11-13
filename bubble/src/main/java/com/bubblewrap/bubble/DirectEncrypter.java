@@ -8,6 +8,7 @@
 
     public class DirectEncrypter {
 //    private static final String SECRET_KEY = "1234567890123456";
+        private BigInteger key;
 
         public static void encryptAndStore(String text, String websiteName, String password) {
             try {
@@ -44,7 +45,7 @@
 
                 BigInteger prime1 = BigInteger.valueOf(primes[0]);
                 BigInteger prime2 = BigInteger.valueOf(primes[1]);
-                BigInteger key = prime1.multiply(prime2);
+                this.key = prime1.multiply(prime2);
 
                 // Step 5: Multiply encryption key with password number
 
@@ -89,7 +90,7 @@
             file.setReadOnly();
         }
 
-        public static BigInteger getKey(BigInteger key){
+        public BigInteger getKey(){
             return key;
         }
 
