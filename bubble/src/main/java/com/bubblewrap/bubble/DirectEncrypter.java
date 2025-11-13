@@ -10,7 +10,7 @@
 //    private static final String SECRET_KEY = "1234567890123456";
         private BigInteger key;
 
-        public static void encryptAndStore(String text, String websiteName, String password) {
+        public void encryptAndStore(String text, String websiteName, String password) {
             try {
                 // Step 2: Uppercase password
                 String upperCasePassword = password.toUpperCase();
@@ -26,15 +26,6 @@
                     }
                 }
 
-                // Step 3: Convert letters to numbers starting from 10
-                StringBuilder values = new StringBuilder();
-                for (int i = 0; i < upperCasePassword.length(); i++) {
-                    char c = upperCasePassword.charAt(i);
-                    if (Character.isLetter(c)) {
-                        int val = c - 'A' + 10; // A=10, B=11, ..., Z=35
-                        values.append(val);
-                    }
-                }
 
                 // Convert to BigInteger
                 String values1 = values.toString();
@@ -51,18 +42,8 @@
 
                 BigInteger encryptedData = value.multiply(prime1).multiply(prime2);
 
-                String output = ": " + encryptedData.toString();
+                String output = websiteName + ": " + encryptedData.toString();
 
-
-
-                int[] primes = generateTwoPrimes();
-                int encryptionKey = primes[0] * primes[1];
-
-                // Step 5: Multiply encryption key with each password number
-                String encryptedData = "" + (value * primes[0] * primes[1]);
-
-                // Step 6: Add website name and save to a data file
-                String output = websiteName + ":" + encryptedData;
                 writeToFile("datafile.txt", output);
 
                 System.out.println("✅ Encrypted data saved successfully to datafile.txt");
@@ -82,7 +63,7 @@
 
         // Write the encrypted text to file (read-only suggestion)
         private static void writeToFile(String filename, String content) throws IOException {
-            try (FileWriter writer = new FileWriter(filename, false)) {
+            try (FileWriter writer = new FileWriter(filename, false)) { //Append and add it to next line
                 writer.write(content);
             }
             // Mark file as read-only (system-level)
@@ -90,11 +71,9 @@
             file.setReadOnly();
         }
 
-        public BigInteger getKey(){
-            return key;
-        }
-
         public static void main(String[] args) {
-            encryptAndStore("Hello from server", "myKey", "MyPassword123");
+            DirectEncrypter encrypter = new DirectEncrypter();
+            encrypter.encryptAndStore("Hello from server", "myKey", "MyPassword123");
+
         }
     }
