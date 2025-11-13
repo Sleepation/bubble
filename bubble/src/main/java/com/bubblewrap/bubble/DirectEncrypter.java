@@ -76,7 +76,7 @@
 
         // Write the encrypted text to file (read-only suggestion)
         private static void writeToFile(String filename, String content) throws IOException {
-            try (FileWriter writer = new FileWriter(filename, true)) { //Append and add it to next line
+            try (FileWriter writer = new FileWriter(filename, false)) { //Append and add it to next line
                 writer.write(content + "\n");
             }
         }
