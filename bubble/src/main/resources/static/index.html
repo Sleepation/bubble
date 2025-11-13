@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>Bubble</title>
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
         body {
             font-family: "Trebuchet MS", serif;
             background-image: url('Images/background.png');
@@ -12,41 +17,64 @@
             background-repeat: no-repeat;
             display: flex;
             flex-direction: column;
+            justify-content: space-between; /* main content + footer */
             align-items: center;
-            justify-content: center;
-            height: 100vh;
             text-align: center;
         }
-        a.btn {
-            display: inline-block;
-            margin: 10px;
-            padding: 12px 24px;
-            text-decoration: none;
-            background-color: #4a90e2;
-            color: white;
-            border-radius: 8px;
-            transition: background 0.3s;
+
+        .main-content {
+            flex: 1; /* fills the space between top and footer */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* center vertically */
+            align-items: center;     /* center horizontally */
+            gap: 20px;
         }
-        a.btn:hover {
-            background-color: #357ABD;
-        }
+
         .button-container {
             display: flex;
             gap: 20px;
             justify-content: center;
         }
+
+        a.btn {
+            display: inline-block;
+            padding: 12px 24px;
+            text-decoration: none;
+            background-color: #041968;
+            color: white;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        a.btn:hover {
+            background-color: #183495;
+        }
+
+        .footer-link {
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 5rem; /* makes it really big */
+            color: #041968; /* white text for contrast */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* subtle shadow to stand out on background */
+        }
+
     </style>
 </head>
 <body>
-<h1>Welcome to Bubble</h1>
-<p>What do you want to do today?</p>
 
-<div class="button-container">
-    <a href="/encryption.html" class="btn">Encrypt</a>
-    <a href="/decrypt.html" class="btn">Decrypt</a>
+<div class="main-content">
+    <h1>Welcome to Bubble</h1>
+    <p>What do you want to do today?</p>
+
+    <div class="button-container">
+        <a href="/encryption.html" class="btn">Encrypt</a>
+        <a href="/decrypt.html" class="btn">Decrypt</a>
+    </div>
 </div>
 
-<p>Learn more about us <a href="/about.html">here</a></p>
+<p class="footer-link">Learn more about us <a href="/about.html">here</a></p>
 
 </body>
 </html>
