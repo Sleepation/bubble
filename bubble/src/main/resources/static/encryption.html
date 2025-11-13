@@ -65,7 +65,7 @@
 
 <script>
     async function encrypt() {
-        const text = document.getElementById("service").value;
+        const text = document.getElementById("password").value;
         const res = await fetch("/api/encrypt", {
             method: "POST",
             headers: { "Content-Type": "text/plain" },
