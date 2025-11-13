@@ -68,16 +68,14 @@
         const passwordInput = document.getElementById("password");
         const serviceInput = document.getElementById("service");
 
-        const password = document.getElementById("password").value;
-        const service = document.getElementById("service").value;
+        const text = document.getElementById("password").value;
         const res = await fetch("/api/encrypt", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                password: password,
-                service: service
-            })
+            headers: { "Content-Type": "text/plain" },
+            body: text
         });
+
+
         const result = await res.text();
         document.getElementById("output").innerText = "Encrypted: " + result;
 
