@@ -11,13 +11,13 @@ public class EmojiMap {
         map.put('0', "(￣ー￣)");
         map.put('1', "(^▽^)");
         map.put('2', "(>ω<)");
-        map.put('3', "(•̀ᴗ•́)و");
-        map.put('4', "(^_−)☆");
-        map.put('5', "(o^▽^o)");
+        map.put('3', "(^人^)");
+        map.put('4', "(＾ω＾)");
+        map.put('5', "(^▽^)");
         map.put('6', "(✧ω✧)");
-        map.put('7', "(^з^)-☆");
+        map.put('7', "(^з^)");
         map.put('8', "(⌒‿⌒)");
-        map.put('9', "(✿◠‿◠)");
+        map.put('9', "(´▽`)");
 
         return map;
     }
