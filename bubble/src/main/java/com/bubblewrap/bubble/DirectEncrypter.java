@@ -81,9 +81,4 @@
         public void decrypt(){
             decrypter.decrypt(fileName);
         }
-
-        public static void main(String[] args) {
-            DirectEncrypter encrypter = new DirectEncrypter("test", "instagram.txt", "Instagram", "abc", new DirectDecrypter());
-            encrypter.decrypt();
-        }
     }
