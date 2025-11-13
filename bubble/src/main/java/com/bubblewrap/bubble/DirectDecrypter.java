@@ -10,32 +10,38 @@ import java.util.Map;
 
 public class DirectDecrypter {
 
-    HashMap<Character, String> emojiMap = EmojiMap.getEmoticonMap();
-    HashMap<String, Character> reverseMap = new HashMap<>();
+    private HashMap<Character, String> emojiMap = EmojiMap.getEmoticonMap();
+    private HashMap<String, Character> reverseMap = new HashMap<>();
 
-    public void newMap(){
-        for(Character c : emojiMap.keySet()) {
+    // Build reverse map ONCE
+    public void newMap() {
+        for (Character c : emojiMap.keySet()) {
             String emoji = emojiMap.get(c);
+
             if (reverseMap.containsKey(emoji)) {
-                System.out.println("Warning: duplicate emoji for characters " + reverseMap.get(emoji) + " and " + c);
+                System.out.println("Warning: duplicate emoji for characters "
+                        + reverseMap.get(emoji) + " and " + c);
             } else {
                 reverseMap.put(emoji, c);
             }
         }
     }
 
-    // Convert emoji string to number/letter string using reverseMap
-    private String emojiToNumber(String emojiPassword) {
-        StringBuilder numeric = new StringBuilder();
+    // Convert emojis back to digits
+    public String emojiToNumber(String emojiPassword) {
+
+        StringBuilder result = new StringBuilder();
         int i = 0;
 
         while (i < emojiPassword.length()) {
             boolean matched = false;
 
-            // Try each emoji in reverseMap
+            // iterate over the emoji tokens
             for (String emoji : reverseMap.keySet()) {
-                if (emojiPassword.startsWith(emoji, i)) {
-                    numeric.append(reverseMap.get(emoji));
+                if (i + emoji.length() <= emojiPassword.length() &&
+                        emojiPassword.substring(i, i + emoji.length()).equals(emoji)) {
+
+                    result.append(reverseMap.get(emoji));
                     i += emoji.length();
                     matched = true;
                     break;
@@ -43,17 +49,22 @@ public class DirectDecrypter {
             }
 
             if (!matched) {
-                // skip unknown chars
-                i++;
+                throw new RuntimeException(
+                        "Unknown emoji starting at: " + emojiPassword.substring(i)
+                );
             }
         }
 
-        return numeric.toString();
+        return result.toString();
     }
 
     // Decrypt file
     public void decrypt(BigInteger key, String fileName) {
+
         try {
+            // MUST build the reverseMap first
+            newMap();
+
             List<String> lines = Files.readAllLines(Paths.get(fileName));
 
             for (String line : lines) {
@@ -63,10 +74,8 @@ public class DirectDecrypter {
                 String name = parts[0].trim();
                 String emojiPassword = parts[1].trim();
 
-                // Convert emoji to numeric string
                 String numericPassword = emojiToNumber(emojiPassword);
 
-                // Convert numeric string to BigInteger and decrypt
                 BigInteger encryptedValue = new BigInteger(numericPassword);
                 BigInteger originalValue = encryptedValue.divide(key);
 
@@ -79,5 +88,4 @@ public class DirectDecrypter {
             System.out.println("Invalid number format in file.");
         }
     }
-
 }

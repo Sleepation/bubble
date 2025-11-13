@@ -13,7 +13,7 @@ public class EmojiMap {
         map.put('2', "(>ω<)");
         map.put('3', "(^人^)");
         map.put('4', "(＾ω＾)");
-        map.put('5', "(^▽^)");
+        map.put('5', "(o▽o)");
         map.put('6', "(✧ω✧)");
         map.put('7', "(^з^)");
         map.put('8', "(⌒‿⌒)");
