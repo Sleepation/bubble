@@ -89,7 +89,7 @@
             file.setReadOnly();
         }
 
-        public BigInteger getKey(BigInteger key){
+        public static BigInteger getKey(BigInteger key){
             return key;
         }
 
