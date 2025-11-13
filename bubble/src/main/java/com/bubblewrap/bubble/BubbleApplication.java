@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BubbleApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BubbleApplication.class, args);
+
+        SpringApplication.run(BubbleApplication.class, args);
+
 	}
 
 }
