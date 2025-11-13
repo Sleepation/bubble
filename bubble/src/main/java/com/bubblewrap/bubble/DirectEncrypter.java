@@ -11,14 +11,13 @@
         private DirectDecrypter decrypter;
         private String fileName;
 
-        DirectEncrypter(String text, String fileName, String websiteName, String password, DirectDecrypter decrypter){
-            this.fileName = fileName;
-            encryptAndStore(text, websiteName, password);
+        DirectEncrypter(String password, DirectDecrypter decrypter){
+            this.fileName = "data";
+            encryptAndStore("hi", "ho", password);
             this.decrypter = decrypter;
-
         }
 
-        public void encryptAndStore(String text, String websiteName, String password) {
+        public String encryptAndStore(String text, String websiteName, String password) {
             try {
                 // Step 2: Uppercase password
                 String upperCasePassword = password.toUpperCase();
@@ -57,6 +56,7 @@
                 writeToFile(fileName, output);
 
                 System.out.println("✅ Encrypted data saved successfully to datafile.txt");
+                return emojiPassword;
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -78,7 +78,7 @@
             }
         }
 
-        public void decrypt(){
-            decrypter.decrypt(fileName);
+        public String decrypt(){
+            return decrypter.decrypt(fileName);
         }
     }

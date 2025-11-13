@@ -77,7 +77,7 @@ public class DirectDecrypter {
     }
 
     // Decrypt file
-    public void decrypt(String fileName) {
+    public String decrypt(String fileName) {
 
         try {
             newMap();
@@ -100,10 +100,13 @@ public class DirectDecrypter {
                 String finalPassword = numberToLetters(originalValue.toString());
                 System.out.println("Final " + finalPassword);
                 System.out.println(name + ": " + finalPassword);
+
+                return finalPassword;
             }
 
         } catch (Exception e) {
             System.out.println("Decrypt error: " + e.getMessage());
         }
+        return null;
     }
 }

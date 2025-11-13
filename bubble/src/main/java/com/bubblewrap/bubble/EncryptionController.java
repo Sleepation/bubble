@@ -9,15 +9,18 @@ import org.springframework.web.bind.annotation.RestController;
     @RestController
     @RequestMapping("/api")
     public class EncryptionController {
+        private DirectEncrypter de;
 
         @PostMapping("/encrypt")
         public String encrypt(@RequestBody String text) {
-            return new StringBuilder(text).reverse().toString(); // fake encryption
+            de = new DirectEncrypter(text, de);
+            return new de.
         }
 
         @PostMapping("/decrypt")
         public String decrypt(@RequestBody String text) {
-            return new StringBuilder(text).reverse().toString(); // fake decryption (reverse again)
+
+            return new DirectEncrypter.decrypt(); // fake decryption (reverse again)
         }
 
 
