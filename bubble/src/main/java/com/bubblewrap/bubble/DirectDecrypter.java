@@ -6,51 +6,45 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DirectDecrypter {
 
-    private HashMap<Character, String> emojiMap;
+    HashMap<Character, String> emojiMap = EmojiMap.getEmoticonMap();
+    HashMap<String, Character> reverseMap = new HashMap<>();
 
-    public DirectDecrypter() {
-        // Get the emoji map from EmojiMap class
-        this.emojiMap = EmojiMap.getEmoticonMap();
-    }
-
-    // Helper method: convert numeric string to emoji string
-    private String numberToEmoji(String numericPassword) {
-        StringBuilder emojiPassword = new StringBuilder();
-        for (char c : numericPassword.toCharArray()) {
-            emojiPassword.append(emojiMap.getOrDefault(c, String.valueOf(c)));
+    for(Character c : emojiMap.keySet()) {
+        String emoji = emojiMap.get(c);
+        if (reverseMap.containsKey(emoji)) {
+            System.out.println("Warning: duplicate emoji for characters " + reverseMap.get(emoji) + " and " + c);
+        } else {
+            reverseMap.put(emoji, c);
         }
-        return emojiPassword.toString();
     }
 
-    //Decrypt method: reads file, decrypts numbers, converts to emoji
-    public void decrypt(BigInteger key, String fileName) {
-        try {
-            List<String> lines = Files.readAllLines(Paths.get(fileName));
+    public String emojiToNumber(String emojiPassword, HashMap<String, Character> reverseMap) {
+        StringBuilder number = new StringBuilder();
+        int i = 0;
+        while (i < emojiPassword.length()) {
+            boolean matched = false;
 
-            for (String line : lines) {
-                if (!line.contains(":")) continue;
-
-                String[] parts = line.split(":", 2);
-                String name = parts[0].trim();
-                String encryptedString = parts[1].trim();
-
-                BigInteger encryptedValue = new BigInteger(encryptedString);
-                BigInteger originalValue = encryptedValue.divide(key);
-
-                String emojiPassword = numberToEmoji(originalValue.toString());
-
-                // Print result
-                System.out.println(name + ": " + emojiPassword);
+            // Try to match each emoji in reverseMap
+            for (String emoji : reverseMap.keySet()) {
+                if (emojiPassword.startsWith(emoji, i)) {
+                    number.append(reverseMap.get(emoji));
+                    i += emoji.length();
+                    matched = true;
+                    break;
+                }
             }
 
-        } catch (IOException e) {
-            System.out.println("Error reading file: " + e.getMessage());
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid encrypted number format in file.");
+            if (!matched) {
+                // if no emoji matches, skip one char (or handle error)
+                i++;
+            }
         }
+
+        return number.toString();
     }
 
 }

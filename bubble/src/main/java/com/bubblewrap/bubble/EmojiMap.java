@@ -25,7 +25,7 @@ public class EmojiMap {
         map.put('O', "(✧ω✧)");
         map.put('P', "(´∀`)");
         map.put('Q', "(ᵔᴥᵔ)");
-        map.put('R', "(¬‿¬)");
+        map.put('R', "(¬°‿‿°¬)");
         map.put('S', "(◕‿◕)");
         map.put('T', "(•‿•✿)");
         map.put('U', "(≧ω≦)");
@@ -45,7 +45,7 @@ public class EmojiMap {
         map.put('g', "(´｡• ω •｡`)");
         map.put('h', "(｡♥‿♥｡)");
         map.put('i', "(◕‿◕✿)");
-        map.put('j', "(¬‿¬)");
+        map.put('j', "(•‿•)");
         map.put('k', "(＾ω＾)");
         map.put('l', "(っ˘ω˘ς)");
         map.put('m', "(✿❛‿❛✿)");
@@ -55,7 +55,7 @@ public class EmojiMap {
         map.put('q', "(✧‿✧)");
         map.put('r', "(◕‿◕)");
         map.put('s', "(ღ✪v✪)ღ");
-        map.put('t', "(¬‿¬)");
+        map.put('t', "(•‿•✿)");
         map.put('u', "(⊃｡•́‿•̀｡)⊃");
         map.put('v', "(✿╹◡╹)");
         map.put('w', "(◕ᴗ◕✿)");
