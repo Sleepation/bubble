@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Encrypt Text 🔒</title>
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            background: #eef2f3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+        textarea {
+            width: 300px;
+            height: 100px;
+            margin: 10px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            padding: 8px;
+        }
+        button, a {
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        button:hover, a:hover {
+            background-color: #357ABD;
+        }
+        #output {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h2>Encrypt Your Text 🔐</h2>
+
+<textarea id="plainText" placeholder="Enter text to encrypt"></textarea><br>
+<button onclick="encrypt()">Encrypt</button>
+<a href="index.html">⬅ Back</a>
+
+<div id="output"></div>
+
+<script>
+    async function encrypt() {
+        const text = document.getElementById("plainText").value;
+        const res = await fetch("/api/encryption", {
+            method: "POST",
+            headers: { "Content-Type": "text/plain" },
+            body: text
+        });
+        const result = await res.text();
+        document.getElementById("output").innerText = "🔒 Encrypted: " + result;
+    }
+</script>
+</body>
+</html>
