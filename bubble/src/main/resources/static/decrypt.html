@@ -49,7 +49,7 @@
 <body>
 <h2 style="color: #1f407c;">Decrypt Your password</h2>
 
-<textarea id="cipherText" placeholder="Enter encrypted password"></textarea><br>
+<textarea id="password" placeholder="Enter encrypted password"></textarea><br>
 <div>
     <button onclick="decrypt()">Decrypt</button>
     <a href="index.html">Back</a>
@@ -60,14 +60,14 @@
 
 <script>
     async function decrypt() {
-        const text = document.getElementById("cipherText").value;
+        const text = document.getElementById("password").value;
         const res = await fetch("/api/decrypt", {
             method: "POST",
             headers: { "Content-Type": "text/plain" },
             body: text
         });
         const result = await res.text();
-        document.getElementById("output").innerText = "🔓 Decrypted: " + result;
+        document.getElementById("output").innerText = "Decrypted: " + result;
     }
 </script>
 </body>

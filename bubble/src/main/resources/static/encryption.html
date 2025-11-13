@@ -65,14 +65,18 @@
 
 <script>
     async function encrypt() {
-        const text = document.getElementById("password").value;
+        const password = document.getElementById("password").value;
+        const service = document.getElementById("service").value;
         const res = await fetch("/api/encrypt", {
             method: "POST",
-            headers: { "Content-Type": "text/plain" },
-            body: text
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                password: password,
+                service: service
+            })
         });
         const result = await res.text();
-        document.getElementById("output").innerText = "🔒 Encrypted: " + result;
+        document.getElementById("output").innerText = "Encrypted: " + result;
     }
 </script>
 </body>
