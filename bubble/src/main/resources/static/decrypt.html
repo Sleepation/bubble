@@ -6,7 +6,12 @@
     <style>
         body {
             font-family: "Inter", sans-serif;
-            background: #eef2f3;
+
+            background-image: url('Images/background.png');
+            background-size: cover;       /* fills screen, may crop edges */
+            background-position: center;  /* keeps it centered */
+            background-repeat: no-repeat; /* prevents tiling */
+
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -25,7 +30,7 @@
         button, a {
             margin: 5px;
             padding: 10px 20px;
-            background-color: #27ae60;
+            background-color: #0096c7;
             color: white;
             border: none;
             border-radius: 8px;
@@ -33,7 +38,7 @@
             text-decoration: none;
         }
         button:hover, a:hover {
-            background-color: #1e874b;
+            background-color: #48cae4;
         }
         #output {
             margin-top: 15px;
@@ -42,11 +47,14 @@
     </style>
 </head>
 <body>
-<h2>Decrypt Your Text 🔓</h2>
+<h2 style="color: #1f407c;">Decrypt Your password</h2>
 
-<textarea id="cipherText" placeholder="Enter text to decrypt"></textarea><br>
-<button onclick="decrypt()">Decrypt</button>
-<a href="index.html">⬅ Back</a>
+<textarea id="cipherText" placeholder="Enter encrypted password"></textarea><br>
+<div>
+    <button onclick="decrypt()">Decrypt</button>
+    <a href="index.html">Back</a>
+</div>
+
 
 <div id="output"></div>
 

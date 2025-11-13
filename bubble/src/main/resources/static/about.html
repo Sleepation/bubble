@@ -4,33 +4,69 @@
     <meta charset="UTF-8">
     <title>About Us</title>
     <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
         body {
-            font-family: Arial;
-            text-align: center;
-            margin-top: 50px;
+            font-family: "Trebuchet MS", serif;
             background-image: url('Images/background.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            display: flex;
+            justify-content: center; /* centers vertically */
+            align-items: center;     /* centers horizontally */
+            text-align: center;
+            padding: 20px;
         }
 
-        a {
+        .about-container {
+            max-width: 600px;                /* limit width for readability */
+            padding: 30px;
+            background-color: rgba(255,255,255,0.85); /* semi-transparent background */
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 4rem;                  /* bigger heading */
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        a.btn {
             display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
+            padding: 12px 24px;
             background-color: #4a90e2;
             color: white;
             border-radius: 8px;
             text-decoration: none;
+            transition: background 0.3s;
         }
-        a:hover { background-color: #357ABD; }
+
+        a.btn:hover {
+            background-color: #357ABD;
+        }
     </style>
 </head>
 <body>
-<h1>About Us</h1>
-<p>Our project is to make safe and accessible encryption for everyone. We provide <br>
-    a secure way to encrypt and store passwords locally. Bubble saves you money and peace of mind.</p>
 
-<a href="/index.html">Back to Home</a>
+<div class="about-container">
+    <h1>About Us</h1>
+    <p>
+        Our project is to make safe and accessible encryption for everyone. We provide a secure way to encrypt
+        and store passwords locally. Bubble saves you money and peace of mind.
+    </p>
+    <a href="/index.html" class="btn">⬅ Back to Home</a>
+</div>
+
 </body>
 </html>
