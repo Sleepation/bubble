@@ -65,6 +65,9 @@
 
 <script>
     async function encrypt() {
+        const passwordInput = document.getElementById("password");
+        const serviceInput = document.getElementById("service");
+
         const password = document.getElementById("password").value;
         const service = document.getElementById("service").value;
         const res = await fetch("/api/encrypt", {
@@ -77,6 +80,9 @@
         });
         const result = await res.text();
         document.getElementById("output").innerText = "Encrypted: " + result;
+
+        passwordInput.value = "";
+        serviceInput.value = "";
     }
 </script>
 </body>

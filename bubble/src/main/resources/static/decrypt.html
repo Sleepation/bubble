@@ -60,6 +60,7 @@
 
 <script>
     async function decrypt() {
+        const encryptedInput = document.getElementById("password");
         const text = document.getElementById("password").value;
         const res = await fetch("/api/decrypt", {
             method: "POST",
@@ -68,6 +69,7 @@
         });
         const result = await res.text();
         document.getElementById("output").innerText = "Decrypted: " + result;
+        encryptedInput.value = "";
     }
 </script>
 </body>
