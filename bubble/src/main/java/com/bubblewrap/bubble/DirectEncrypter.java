@@ -63,6 +63,7 @@
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            return null;
         }
 
         // Generate two random primes (simple example)
